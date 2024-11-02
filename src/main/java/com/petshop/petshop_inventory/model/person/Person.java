@@ -25,9 +25,16 @@ public class Person {
     private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private Long documentNumber;
+
     private DocumentType documentType;
+
+    @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String phone;
 
 
