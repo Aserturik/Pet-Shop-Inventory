@@ -9,12 +9,9 @@ public record BatchRegisterDTO(
 
         @NotBlank
         String batchNumber,
-        @NotNull
-        Long productId,
 
-        LocalDate expirationDate,
-        Integer quantity,
-        Double unitPrice
+        LocalDate expirationDate
+
 
 
 
