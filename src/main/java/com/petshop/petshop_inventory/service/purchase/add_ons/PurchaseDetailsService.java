@@ -28,12 +28,14 @@ public class PurchaseDetailsService {
 
         product.setStock(product.getStock() + purchaseDetailsRegisterDTO.quantity());
         product.setPurchasePrice(purchaseDetailsRegisterDTO.unitPrice());
-        productRepository.save(product);
+
 
 
         var batch = new Batch(purchaseDetailsRegisterDTO.batch(), product, purchaseDetailsRegisterDTO.quantity());
         System.out.println("Batch: " + batch);
         batchRepository.save(batch);
+        product.addBatch(batch);
+        productRepository.save(product);
 
         var purchaseDetails = new PurchaseDetails(purchaseDetailsRegisterDTO, batch);
         purchaseDetails.setPurchase(purchase);

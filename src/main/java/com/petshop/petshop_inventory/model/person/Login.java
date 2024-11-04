@@ -3,6 +3,7 @@ package com.petshop.petshop_inventory.model.person;
 
 import com.petshop.petshop_inventory.model.person.add_ons.Role;
 import com.petshop.petshop_inventory.model.person.add_ons.State;
+import com.petshop.petshop_inventory.model.sale.Sale;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -36,12 +37,16 @@ public class Login implements UserDetails {
     @NotNull
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull
     private State state;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private Person person;
 
+    @OneToMany(mappedBy = "login", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Sale> sales;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

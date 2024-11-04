@@ -1,14 +1,17 @@
 package com.petshop.petshop_inventory.model.person;
 
 
+import com.petshop.petshop_inventory.model.invoice.Invoice;
 import com.petshop.petshop_inventory.model.person.add_ons.DocumentType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "person")
 
@@ -29,6 +32,8 @@ public class Person {
     @Column(unique = true)
     private Long documentNumber;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull
     private DocumentType documentType;
 
     @Column(unique = true)
@@ -42,4 +47,6 @@ public class Person {
     @OneToOne(mappedBy = "person")
     private Login login;
 
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Invoice> invoices;
 }
