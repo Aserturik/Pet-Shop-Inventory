@@ -45,7 +45,6 @@ public class Product {
         this.barCode = productRegisterData.barCode();
         this.purchasePrice = productRegisterData.purchasePrice();
         this.salePrice = productRegisterData.salePrice();
-        this.stock = productRegisterData.stock();
     }
 
     public void update(ProductUpdateDTO productUpdateData) {

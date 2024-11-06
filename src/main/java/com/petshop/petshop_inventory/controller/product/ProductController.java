@@ -5,6 +5,7 @@ package com.petshop.petshop_inventory.controller.product;
 import com.petshop.petshop_inventory.dto.product.ProductRegisterDTO;
 import com.petshop.petshop_inventory.dto.product.ProductResponseDTO;
 import com.petshop.petshop_inventory.dto.product.ProductUpdateDTO;
+import com.petshop.petshop_inventory.infra.errors.IntegrityValidation;
 import com.petshop.petshop_inventory.service.product.ProductService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -26,7 +27,7 @@ public class ProductController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ProductResponseDTO> registerProduct(@RequestBody @Valid ProductRegisterDTO productRegisterDTO, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ProductResponseDTO> registerProduct(@RequestBody @Valid ProductRegisterDTO productRegisterDTO, UriComponentsBuilder uriBuilder) throws IntegrityValidation {
         var product = productService.registerProduct(productRegisterDTO);
         var uri = uriBuilder.path("/product/{id}").buildAndExpand(product.id()).toUri();
         return ResponseEntity.created(uri).body(product);
@@ -50,7 +51,7 @@ public class ProductController {
 
     @GetMapping("/{barCode}")
     @Transactional
-    public ResponseEntity<ProductResponseDTO> getProductByBarCode(@PathVariable String barCode){
+    public ResponseEntity<ProductResponseDTO> getProductByBarCode(@PathVariable String barCode) throws IntegrityValidation {
         var product = productService.getProductByBarCode(barCode);
         return ResponseEntity.ok(product);
 

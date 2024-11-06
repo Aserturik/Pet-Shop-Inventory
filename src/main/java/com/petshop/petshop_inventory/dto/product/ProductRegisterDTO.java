@@ -16,9 +16,6 @@ public record ProductRegisterDTO(
         Double purchasePrice,
         @NotNull
         @Positive
-        Double salePrice,
-        @NotNull
-        @PositiveOrZero
-        Integer stock
+        Double salePrice
 ) {
 }
