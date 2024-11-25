@@ -52,8 +52,7 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Invoice> invoices;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Sale> sales;
+
 
 
     public Person(PersonRegisterDTO personRegisterDTO) {
