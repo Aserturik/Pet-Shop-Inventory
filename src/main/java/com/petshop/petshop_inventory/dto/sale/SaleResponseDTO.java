@@ -10,6 +10,7 @@ import java.util.List;
 
 public record SaleResponseDTO(
 
+        Long id,
         List<SaleDetailsResponseDTO> saleDetails,
         LocalDateTime saleDate,
         Double total,
@@ -22,9 +23,10 @@ public record SaleResponseDTO(
 ) {
 
     public SaleResponseDTO(Sale sale) {
-        this(sale.getSaleDetails().stream()
+        this(sale.getId(),sale.getSaleDetails().stream()
                         .map(SaleDetailsResponseDTO::new)
                         .toList(),
+
                 sale.getSaleDate(),
                 sale.getTotal(),
                 sale.getPaymentMethod(),

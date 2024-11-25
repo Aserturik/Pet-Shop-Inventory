@@ -4,6 +4,7 @@ package com.petshop.petshop_inventory.model.person;
 import com.petshop.petshop_inventory.dto.person.PersonRegisterDTO;
 import com.petshop.petshop_inventory.model.invoice.Invoice;
 import com.petshop.petshop_inventory.model.person.add_ons.DocumentType;
+import com.petshop.petshop_inventory.model.sale.Sale;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,10 @@ public class Person {
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Invoice> invoices;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Sale> sales;
+
 
     public Person(PersonRegisterDTO personRegisterDTO) {
         this.name = personRegisterDTO.name();

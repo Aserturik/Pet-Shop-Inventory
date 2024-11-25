@@ -44,6 +44,8 @@ public class Sale {
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 
+
+
     public Sale(SaleRegisterDTO saleRegisterDTO, Login login) {
         this.saleDate = LocalDateTime.now();
         this.paymentMethod = saleRegisterDTO.paymentMethod();
