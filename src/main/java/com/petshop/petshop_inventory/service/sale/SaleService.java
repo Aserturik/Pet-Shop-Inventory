@@ -7,6 +7,8 @@ import com.petshop.petshop_inventory.repository.person.LoginRepository;
 import com.petshop.petshop_inventory.repository.sale.SaleRepository;
 import com.petshop.petshop_inventory.service.sale.add_ons.SaleDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.petshop.petshop_inventory.model.sale.add_ons.SaleDetails;
 
@@ -45,5 +47,10 @@ public class SaleService {
 
         saleRepository.save(sale);
         return new SaleResponseDTO(sale);
+    }
+
+
+    public Page<SaleResponseDTO> getAllSales(Pageable pageable) {
+        return saleRepository.findAll(pageable).map(SaleResponseDTO::new);
     }
 }
