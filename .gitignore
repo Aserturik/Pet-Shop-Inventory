@@ -1,3 +1,7 @@
+# Ignorar todos los archivos .properties
+*.properties
+
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
