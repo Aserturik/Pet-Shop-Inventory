@@ -1,36 +1,32 @@
 package com.petshop.petshop_inventory.infra.security.config;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class HmacEncryption {
 
-    private static final String HMAC_ALGORITHM = "HmacSHA256";
+    private static final BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
 
     /**
-     * Método para encriptar una clave usando HMAC-SHA256
+     * Método para encriptar una clave usando BCrypt
      *
      * @param key la clave a encriptar
-     * @return la clave encriptada en formato Base64
-     * @throws Exception si ocurre algún error durante el proceso
+     * @return la clave encriptada
      */
-    public static String encryptKey(String key) throws Exception {
-        // Crear un mensaje fijo o un dato base para el HMAC
-        String data = "data_fijo_para_hmac";
-
-        // Crear el SecretKeySpec con la clave proporcionada
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), HMAC_ALGORITHM);
-
-        // Inicializar el algoritmo HMAC con el SecretKeySpec
-        Mac mac = Mac.getInstance(HMAC_ALGORITHM);
-        mac.init(secretKeySpec);
-
-        // Generar el HMAC para los datos fijos
-        byte[] hmacBytes = mac.doFinal(data.getBytes());
-
-        // Retornar el resultado en Base64
-        return Base64.getEncoder().encodeToString(hmacBytes);
+    public static String encryptKey(String key) {
+        // Generar el hash de la clave usando BCrypt
+        return bcryptEncoder.encode(key);
     }
+
+    /**
+     * Método para verificar si una clave sin encriptar coincide con el hash encriptado
+     *
+     * @param rawKey     la clave sin encriptar
+     * @param hashedKey  la clave encriptada
+     * @return true si coinciden, false de lo contrario
+     */
+    public static boolean verifyKey(String rawKey, String hashedKey) {
+        return bcryptEncoder.matches(rawKey, hashedKey);
+    }
+
 
 }

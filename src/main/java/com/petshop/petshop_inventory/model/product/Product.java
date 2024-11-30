@@ -60,6 +60,9 @@ public class Product {
         if(productUpdateData.salePrice() != null){
             this.salePrice = productUpdateData.salePrice();
         }
+        if(productUpdateData.urlImage() != null){
+            this.urlImage = productUpdateData.urlImage();
+        }
     }
 
     public void addBatch(Batch batch){
