@@ -2,6 +2,7 @@ package com.petshop.petshop_inventory.model.person;
 
 
 import com.petshop.petshop_inventory.dto.person.PersonRegisterDTO;
+import com.petshop.petshop_inventory.dto.person.PersonUpdateDTO;
 import com.petshop.petshop_inventory.model.person.add_ons.DocumentType;
 import com.petshop.petshop_inventory.model.sale.Sale;
 import jakarta.persistence.*;
@@ -64,5 +65,23 @@ public class Person {
         this.email = personRegisterDTO.email();
         this.phone = personRegisterDTO.phone();
 
+    }
+
+    public void update(PersonUpdateDTO personUpdateDTO) {
+        if(personUpdateDTO.name() != null){
+            this.name = personUpdateDTO.name();
+        }
+        if(personUpdateDTO.documentNumber() != null){
+            this.documentNumber = personUpdateDTO.documentNumber();
+        }
+        if(personUpdateDTO.documentType() != null){
+            this.documentType = personUpdateDTO.documentType();
+        }
+        if(personUpdateDTO.email() != null){
+            this.email = personUpdateDTO.email();
+        }
+        if(personUpdateDTO.phone() != null){
+            this.phone = personUpdateDTO.phone();
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.petshop.petshop_inventory.controller.person;
 
 import com.petshop.petshop_inventory.dto.person.PersonRegisterDTO;
 import com.petshop.petshop_inventory.dto.person.PersonResponseDTO;
+import com.petshop.petshop_inventory.dto.person.PersonUpdateDTO;
 import com.petshop.petshop_inventory.infra.errors.IntegrityValidation;
 import com.petshop.petshop_inventory.service.person.PersonService;
 import jakarta.transaction.Transactional;
@@ -36,6 +37,14 @@ public class PersonController {
         PagedModel<PersonResponseDTO> pagedModel = new PagedModel<>(people);
         return ResponseEntity.ok(pagedModel);
     }
+
+
+    @PutMapping
+     @Transactional
+        public ResponseEntity<PersonResponseDTO> updatePerson(@RequestBody @Valid PersonUpdateDTO personUpdateDTO){
+            var person = personService.updatePerson(personUpdateDTO);
+            return ResponseEntity.ok(person);
+        }
 
 
 
