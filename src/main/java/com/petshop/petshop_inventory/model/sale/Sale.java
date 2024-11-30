@@ -2,8 +2,8 @@ package com.petshop.petshop_inventory.model.sale;
 
 
 import com.petshop.petshop_inventory.dto.sale.SaleRegisterDTO;
-import com.petshop.petshop_inventory.model.invoice.Invoice;
 import com.petshop.petshop_inventory.model.person.Login;
+import com.petshop.petshop_inventory.model.person.Person;
 import com.petshop.petshop_inventory.model.sale.add_ons.PaymentMethod;
 import com.petshop.petshop_inventory.model.sale.add_ons.SaleDetails;
 import jakarta.persistence.*;
@@ -40,9 +40,10 @@ public class Sale {
     @JoinColumn(name = "login_id")
     private Login login;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "invoice_id")
-    private Invoice invoice;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
+    private Person person;
+
 
 
 

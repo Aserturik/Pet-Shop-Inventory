@@ -2,7 +2,6 @@ package com.petshop.petshop_inventory.model.person;
 
 
 import com.petshop.petshop_inventory.dto.person.PersonRegisterDTO;
-import com.petshop.petshop_inventory.model.invoice.Invoice;
 import com.petshop.petshop_inventory.model.person.add_ons.DocumentType;
 import com.petshop.petshop_inventory.model.sale.Sale;
 import jakarta.persistence.*;
@@ -12,8 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Table(name = "person")
 
@@ -49,8 +49,10 @@ public class Person {
     @OneToOne(mappedBy = "person")
     private Login login;
 
+
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Invoice> invoices;
+    private List<Sale> sale = new ArrayList<>();
+
 
 
 
