@@ -1,5 +1,6 @@
 package com.petshop.petshop_inventory.dto.purchase.add_ons;
 
+import com.petshop.petshop_inventory.dto.product.add_ons.BatchResponseDTO;
 import com.petshop.petshop_inventory.model.purchase.add_ons.PurchaseDetails;
 
 public record PurchaseDetailsResponseDTO(
@@ -9,7 +10,8 @@ public record PurchaseDetailsResponseDTO(
         String productBatch,
         Double unitPrice,
         Integer quantity,
-        Double total
+        Double total,
+        BatchResponseDTO bach
 
 
 ) {
@@ -19,7 +21,12 @@ public record PurchaseDetailsResponseDTO(
                 purchaseDetails.getBatch().getBatchNumber(),
                 purchaseDetails.getUnitPrice(),
                 purchaseDetails.getQuantity(),
-                purchaseDetails.getTotal());
+                purchaseDetails.getTotal(),
+                new BatchResponseDTO(purchaseDetails.getBatch())
+
+                );
+
+
 
     }
 }
