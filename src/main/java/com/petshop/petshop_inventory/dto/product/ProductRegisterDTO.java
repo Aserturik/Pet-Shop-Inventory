@@ -16,6 +16,11 @@ public record ProductRegisterDTO(
         Double purchasePrice,
         @NotNull
         @Positive
-        Double salePrice
+        Double salePrice,
+
+        @NotNull
+        String urlImage
+
+
 ) {
 }

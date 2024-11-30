@@ -9,12 +9,13 @@ public record ProductResponseDTO(
         String barCode,
         Double purchasePrice,
         Double salePrice,
-        Integer stock
+        Integer stock,
+        String urlImage
 
 
 
 ) {
     public ProductResponseDTO(Product product){
-        this(product.getId(), product.getName(), product.getBarCode(), product.getPurchasePrice(), product.getSalePrice(), product.getStock());
+        this(product.getId(), product.getName(), product.getBarCode(), product.getPurchasePrice(), product.getSalePrice(), product.getStock(), product.getUrlImage());
     }
 }

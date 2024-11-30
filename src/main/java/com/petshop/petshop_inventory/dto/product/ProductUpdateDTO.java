@@ -16,7 +16,8 @@ public record ProductUpdateDTO(
         String barCode,
 
         @Positive
-        Double salePrice
+        Double salePrice,
+        String urlImage
 
 
 ) {

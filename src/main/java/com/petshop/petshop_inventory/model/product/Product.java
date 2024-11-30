@@ -36,6 +36,8 @@ public class Product {
     private Double purchasePrice;
     private Double salePrice;
     private Integer stock = 0;
+    @Column(unique = true)
+    private String urlImage;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Batch> batches = new ArrayList<>();
