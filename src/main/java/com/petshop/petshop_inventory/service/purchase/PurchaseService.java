@@ -6,6 +6,8 @@ import com.petshop.petshop_inventory.model.purchase.Purchase;
 import com.petshop.petshop_inventory.repository.purchase.PurchaseRepository;
 import com.petshop.petshop_inventory.service.purchase.add_ons.PurchaseDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -32,5 +34,10 @@ public class PurchaseService {
 
         purchaseRepository.save(purchase);
         return new PurchaseResponseDTO(purchase);
+    }
+
+
+    public Page<PurchaseResponseDTO> getAllPurchase(Pageable pageable) {
+        return purchaseRepository.findAll(pageable).map(PurchaseResponseDTO::new);
     }
 }

@@ -3,6 +3,8 @@ package com.petshop.petshop_inventory.controller.authentication;
 
 import com.petshop.petshop_inventory.dto.authentication.JWTAndLoginAuthenticatedDTO;
 import com.petshop.petshop_inventory.dto.authentication.LoginAuthenticationDTO;
+import com.petshop.petshop_inventory.dto.person.add_ons.LoginRegisterDTO;
+import com.petshop.petshop_inventory.dto.person.add_ons.LoginResponseDTO;
 import com.petshop.petshop_inventory.model.person.Login;
 import com.petshop.petshop_inventory.service.authentication.TokenService;
 import com.petshop.petshop_inventory.service.person.LoginService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/login")
@@ -48,6 +51,15 @@ public class AuthenticationController {
 
 
         return ResponseEntity.ok(new JWTAndLoginAuthenticatedDTO((Login) login, JWTToken));
+    }
+
+
+    @PostMapping("/register")
+    @Transactional
+    public ResponseEntity<LoginResponseDTO> registerLogin (@RequestBody @Valid LoginRegisterDTO loginRegisterDTO, UriComponentsBuilder uriBuilder) throws Exception {
+        var login = loginService.registerLogin(loginRegisterDTO);
+        var uri = uriBuilder.path("/login/{id}").buildAndExpand(login.id()).toUri();
+        return ResponseEntity.created(uri).body(login);
     }
 
 

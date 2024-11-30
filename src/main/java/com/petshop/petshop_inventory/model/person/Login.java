@@ -1,6 +1,8 @@
 package com.petshop.petshop_inventory.model.person;
 
 
+import com.petshop.petshop_inventory.dto.person.add_ons.LoginRegisterDTO;
+import com.petshop.petshop_inventory.infra.security.config.HmacEncryption;
 import com.petshop.petshop_inventory.model.person.add_ons.Role;
 import com.petshop.petshop_inventory.model.person.add_ons.State;
 import com.petshop.petshop_inventory.model.sale.Sale;
@@ -47,6 +49,18 @@ public class Login implements UserDetails {
 
     @OneToMany(mappedBy = "login", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Sale> sales;
+
+
+
+    public Login(LoginRegisterDTO loginRegisterData, Person person) throws Exception {
+        this.username = loginRegisterData.email();
+        this.password = HmacEncryption.encryptKey(loginRegisterData.password());
+        this.role = loginRegisterData.role();
+        this.state = State.ACTIVE;
+        this.person = person;
+
+
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
