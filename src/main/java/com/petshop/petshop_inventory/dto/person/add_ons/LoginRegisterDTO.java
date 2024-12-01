@@ -6,9 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record LoginRegisterDTO(
-
-        @NotNull
-        Long idPerson,
         @NotBlank
         @Email
         String email,

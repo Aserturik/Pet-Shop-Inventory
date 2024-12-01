@@ -52,12 +52,12 @@ public class Login implements UserDetails {
 
 
 
-    public Login(LoginRegisterDTO loginRegisterData, Person person) throws Exception {
+    public Login(LoginRegisterDTO loginRegisterData) throws Exception {
         this.username = loginRegisterData.email();
         this.password = HmacEncryption.encryptKey(loginRegisterData.password());
         this.role = loginRegisterData.role();
         this.state = State.ACTIVE;
-        this.person = person;
+
 
 
     }

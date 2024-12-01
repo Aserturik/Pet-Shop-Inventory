@@ -17,8 +17,7 @@ public class LoginService {
 
 
     public LoginResponseDTO registerLogin(LoginRegisterDTO loginRegisterDTO) throws Exception {
-        var person = personRepository.findById(loginRegisterDTO.idPerson()).orElseThrow(() -> new Exception("Person not found"));
-        var login = new Login(loginRegisterDTO, person);
+        var login = new Login(loginRegisterDTO);
         loginRepository.save(login);
         return new LoginResponseDTO(login);
     }
