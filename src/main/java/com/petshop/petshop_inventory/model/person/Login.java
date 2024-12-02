@@ -57,9 +57,6 @@ public class Login implements UserDetails {
         this.password = HmacEncryption.encryptKey(loginRegisterData.password());
         this.role = loginRegisterData.role();
         this.state = State.ACTIVE;
-
-
-
     }
 
     @Override
