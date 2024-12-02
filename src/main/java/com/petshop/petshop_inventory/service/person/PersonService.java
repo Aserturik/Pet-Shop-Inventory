@@ -4,6 +4,7 @@ import com.petshop.petshop_inventory.dto.person.PersonRegisterDTO;
 import com.petshop.petshop_inventory.dto.person.PersonResponseDTO;
 import com.petshop.petshop_inventory.dto.person.PersonUpdateDTO;
 import com.petshop.petshop_inventory.model.person.Person;
+import com.petshop.petshop_inventory.model.person.add_ons.Role;
 import com.petshop.petshop_inventory.repository.person.PersonRepository;
 import com.petshop.petshop_inventory.validation.person.PersonRegistrationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class PersonService {
         person.update(personUpdateDTO);
         personRepository.save(person);
         return new PersonResponseDTO(person);
+    }
+
+    public Page<PersonResponseDTO> getAllEmployees(Pageable pageable) {
+        var employees = personRepository.findAllByRole(Role.WORKER, pageable);
+        return employees.map(PersonResponseDTO::new);
     }
 }

@@ -38,6 +38,14 @@ public class PersonController {
         return ResponseEntity.ok(pagedModel);
     }
 
+    @GetMapping("/employee")
+    @Transactional
+    public ResponseEntity<PagedModel<PersonResponseDTO>> getAllEmployees(Pageable pageable){
+        var people = personService.getAllEmployees(pageable);
+        PagedModel<PersonResponseDTO> pagedModel = new PagedModel<>(people);
+        return ResponseEntity.ok(pagedModel);
+    }
+
 
     @PutMapping
      @Transactional
