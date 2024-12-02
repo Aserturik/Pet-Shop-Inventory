@@ -32,6 +32,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/registerAdmin").permitAll()
                         .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll() // Asegúrate de que estas rutas estén antes de la autenticación
                         .anyRequest().authenticated()
                 )

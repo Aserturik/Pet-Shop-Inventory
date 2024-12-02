@@ -3,6 +3,8 @@ package com.petshop.petshop_inventory.controller.authentication;
 
 import com.petshop.petshop_inventory.dto.authentication.JWTAndLoginAuthenticatedDTO;
 import com.petshop.petshop_inventory.dto.authentication.LoginAuthenticationDTO;
+import com.petshop.petshop_inventory.dto.person.add_ons.AdminRegisterDTO;
+import com.petshop.petshop_inventory.dto.person.add_ons.AdminResponseDTO;
 import com.petshop.petshop_inventory.dto.person.add_ons.LoginRegisterDTO;
 import com.petshop.petshop_inventory.dto.person.add_ons.LoginResponseDTO;
 import com.petshop.petshop_inventory.model.person.Login;
@@ -52,6 +54,16 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new JWTAndLoginAuthenticatedDTO((Login) login, JWTToken));
     }
+
+    @PostMapping("/registerAdmin")
+    @Transactional
+    public ResponseEntity<AdminResponseDTO> registerAdminLogin (@RequestBody @Valid AdminRegisterDTO adminRegisterDTO ) throws Exception {
+        var admin = loginService.registerAdmin(adminRegisterDTO);
+
+        return ResponseEntity.ok(admin);
+    }
+
+
 
 
     @PostMapping("/register")
