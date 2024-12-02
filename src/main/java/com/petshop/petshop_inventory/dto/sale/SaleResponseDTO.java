@@ -1,5 +1,6 @@
 package com.petshop.petshop_inventory.dto.sale;
 
+import com.petshop.petshop_inventory.dto.person.PersonResponseDTO;
 import com.petshop.petshop_inventory.dto.sale.add_ons.SaleDetailsRegisterDTO;
 import com.petshop.petshop_inventory.dto.sale.add_ons.SaleDetailsResponseDTO;
 import com.petshop.petshop_inventory.model.sale.Sale;
@@ -15,9 +16,9 @@ public record SaleResponseDTO(
         LocalDateTime saleDate,
         Double total,
         PaymentMethod paymentMethod,
-        String workerName
-        //ToDo agregar referencia de la factura
-        //Long invoiceNumber
+        String workerName,
+
+        PersonResponseDTO client
 
 
 ) {
@@ -30,7 +31,8 @@ public record SaleResponseDTO(
                 sale.getSaleDate(),
                 sale.getTotal(),
                 sale.getPaymentMethod(),
-                sale.getLogin().getPerson().getName()
+                sale.getLogin().getPerson().getName(),
+                new PersonResponseDTO(sale.getPerson())
         );
     }
 }

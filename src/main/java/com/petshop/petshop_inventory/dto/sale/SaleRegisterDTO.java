@@ -15,6 +15,9 @@ public record SaleRegisterDTO(
         PaymentMethod paymentMethod,
 
         @NotNull
-        String username
+        String username,
+
+        @NotNull
+        Long clientId
 ) {
 }

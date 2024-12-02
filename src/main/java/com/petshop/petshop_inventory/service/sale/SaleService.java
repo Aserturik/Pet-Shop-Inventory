@@ -4,6 +4,7 @@ import com.petshop.petshop_inventory.dto.sale.SaleRegisterDTO;
 import com.petshop.petshop_inventory.dto.sale.SaleResponseDTO;
 import com.petshop.petshop_inventory.model.sale.Sale;
 import com.petshop.petshop_inventory.repository.person.LoginRepository;
+import com.petshop.petshop_inventory.repository.person.PersonRepository;
 import com.petshop.petshop_inventory.repository.sale.SaleRepository;
 import com.petshop.petshop_inventory.service.sale.add_ons.SaleDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,17 @@ public class SaleService {
     @Autowired
     private LoginRepository loginRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     public SaleResponseDTO registerSale(SaleRegisterDTO saleRegisterDTO) {
 
         //TODO crear validacion dd que el login exista
         var login = loginRepository.findByUsernameData(saleRegisterDTO.username());
+        var client = personRepository.findById(saleRegisterDTO.clientId()).get();
 
         var sale = new Sale(saleRegisterDTO, login);
+        sale.setPerson(client);
 
 
         //ToDO problema
